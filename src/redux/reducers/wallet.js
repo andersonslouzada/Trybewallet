@@ -1,8 +1,16 @@
-import { ACTION_FETCH_CURRENCIES, ACTION_CLICKBUTTON, DELETE_EXPENSE } from '../actions';
+import {
+  ACTION_FETCH_CURRENCIES,
+  ACTION_CLICKBUTTON,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+  FINISH_EDIT_EXPENSE,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  isEditing: false,
+  expenseToEdit: 0,
 };
 
 export const wallet = (state = INITIAL_STATE, { type, payload }) => {
@@ -29,6 +37,19 @@ export const wallet = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       expenses: [...state.expenses.filter((expense) => expense.id !== payload)],
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      isEditing: true,
+      expenseToEdit: payload,
+    };
+  case FINISH_EDIT_EXPENSE:
+    return {
+      ...state,
+      expenses: payload,
+      isEditing: false,
+      expenseToEdit: 0,
     };
   default:
     return state;

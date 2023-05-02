@@ -9,11 +9,8 @@ class Header extends Component {
       <div>
         <p data-testid="email-field">{`Email ${email}`}</p>
         <p data-testid="total-field">
-          {expenses
-            .reduce((acc, item) => acc + (Number(item
-              .value) * Number(item.exchangeRates[item.currency].ask)), 0)
-            .toFixed(2)}
-
+          {expenses.reduce((acc, item) => acc + (Number(item
+            .value) * Number(item.exchangeRates[item.currency].ask)), 0).toFixed(2)}
         </p>
         <p data-testid="header-currency-field">BRL</p>
 
